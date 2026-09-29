@@ -1,62 +1,71 @@
-const nome = "Marcos Soares";
-const remedio1 = "Losartana";
-const remedio2 = "Amoxicilina";
-const horarioInicial = "07:00";
-const intervaloHoras = 6;
-const quantidadeDoses = 2;
+// --- Cronograma de medicamentos ---
 
-const [hora, minuto] = horarioInicial.split(":").map(Number);
+const paracetamol = true;
+const vitaminaC = true;
+const ibuprofeno = false;
 
-let data = new Date();
-data.setHours(hora, minuto, 0, 0);
+const horarioParacetamol = "08:00";
+const horarioVitaminaC = "14:00";
+const horarioIbuprofeno = "20:00";
 
-let horarioDose1 = data.toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit"
-});
+const tomouParacetamol = true;
+const tomouVitaminaC = false;
+const tomouIbuprofeno = false;
 
-data.setHours(data.getHours() + intervaloHoras);
-
-let horarioDose2 = data.toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit"
-});
-
-let statusCronograma;
-
-if (quantidadeDoses === 2 && intervaloHoras > 0) {
-    statusCronograma = "Cronograma criado";
+// Verificar medicamentos cadastrados
+if (paracetamol || vitaminaC || ibuprofeno) {
+  console.log("Existe pelo menos um medicamento no cronograma.");
 } else {
-    statusCronograma = "Cronograma inválido";
+  console.log("Nenhum medicamento cadastrado.");
 }
 
+// Verificar Paracetamol
+if (paracetamol && tomouParacetamol) {
+  console.log(`Paracetamol: tomado às ${horarioParacetamol}.`);
+} else if (paracetamol) {
+  console.log(`Paracetamol: pendente. Horário: ${horarioParacetamol}.`);
+}
+
+// Verificar Vitamina C
+if (vitaminaC && tomouVitaminaC) {
+  console.log(`Vitamina C: tomada às ${horarioVitaminaC}.`);
+} else if (vitaminaC) {
+  console.log(`Vitamina C: pendente. Horário: ${horarioVitaminaC}.`);
+}
+
+// Verificar Ibuprofeno
+if (ibuprofeno && tomouIbuprofeno) {
+  console.log(`Ibuprofeno: tomado às ${horarioIbuprofeno}.`);
+} else if (ibuprofeno) {
+  console.log(`Ibuprofeno: pendente. Horário: ${horarioIbuprofeno}.`);
+}
+
+// Verificar se existe medicamento pendente
+if (
+  (!paracetamol || tomouParacetamol) &&
+  (!vitaminaC || tomouVitaminaC) &&
+  (!ibuprofeno || tomouIbuprofeno)
+) {
+  console.log("Todos os medicamentos foram registrados.");
+} else {
+  console.log("Existe medicamento pendente.");
+}
+
+// Resumo
 const resumo = `
-===== CRONOGRAMA DE MEDICAMENTOS =====
+--- CRONOGRAMA DE MEDICAMENTOS ---
 
-Nome: ${nome}
+Paracetamol: ${paracetamol}
+Horário: ${horarioParacetamol}
+Tomado: ${tomouParacetamol}
 
-Medicamento 1: ${remedio1}
-Medicamento 2: ${remedio2}
+Vitamina C: ${vitaminaC}
+Horário: ${horarioVitaminaC}
+Tomada: ${tomouVitaminaC}
 
-Horário inicial: ${horarioInicial}
-Intervalo: ${intervaloHoras} horas
-Quantidade de doses: ${quantidadeDoses}
-
-Dose 1: ${horarioDose1}
-Dose 2: ${horarioDose2}
-
-Situação: ${statusCronograma}
+Ibuprofeno: ${ibuprofeno}
+Horário: ${horarioIbuprofeno}
+Tomado: ${tomouIbuprofeno}
 `;
 
-module.exports = {
-    nome,
-    remedio1,
-    remedio2,
-    horarioInicial,
-    intervaloHoras,
-    quantidadeDoses,
-    horarioDose1,
-    horarioDose2,
-    statusCronograma,
-    resumo
-};
+console.log(resumo);
