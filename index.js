@@ -66,6 +66,6 @@ Tomada: ${tomouVitaminaC}
 Ibuprofeno: ${ibuprofeno}
 Horário: ${horarioIbuprofeno}
 Tomado: ${tomouIbuprofeno}
-`;
+`
 
 console.log(resumo)
